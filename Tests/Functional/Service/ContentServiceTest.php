@@ -44,6 +44,8 @@ class ContentServiceTest extends AbstractDataHandlerActionTestCase {
 	const FLUIDCONTENT_NESTED_OUTER_CONTAINER_ID = 300;
 	const FLUIDCONTENT_NESTED_INNER_CONTAINER_ID = 301;
 	const FLUIDCONTENT_NESTED_INNER_CONTENT_ID = 302;
+	const LANGUAGE_DEFAULT = 0;
+	const LANGUAGE_TARGET = 1;
 
 	public function setUp() {
 		parent::setUp();
@@ -334,5 +336,16 @@ class ContentServiceTest extends AbstractDataHandlerActionTestCase {
 		$this->assertContentInFluxElement($newInnerContainerRecord['uid'], 'headline', $newContentRecord);
 	}
 
+	/**
+	 * @test
+	 *
+	 * creates a localisation of a standard content element that doesn't reside in a flux container
+	 * and checks, if this doesn't have a flux parent
+	 */
+	public function translatedRecordOutsideFluxElementHasFluxParentZeroAfterCreation() {
+		$mappingArray = $this->actionService->localizeRecord('tt_content', self::CONTENT_ID_BELOW, self::LANGUAGE_TARGET);
+
+		$localizedRecord = BackendUtility::getRecord('tt_content', $mappingArray['tt_content'][self::CONTENT_ID_BELOW]);
+		$this->assertContentNotInFluxElement($localizedRecord);
+	}
 }
- 
