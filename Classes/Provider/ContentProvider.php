@@ -140,7 +140,9 @@ class ContentProvider extends AbstractProvider implements ProviderInterface {
 					$this->contentService->pasteAfter($command, $row, $parameters, $reference);
 				} else {
 					$moveData = $this->getMoveData();
-					$this->contentService->moveRecord($row, $relativeTo, $moveData, $reference);
+					if (NULL !== $moveData) {
+						$this->contentService->moveRecord($row, $relativeTo, $moveData, $reference);
+					}
 				}
 			}
 			if ($command === 'localize') {
