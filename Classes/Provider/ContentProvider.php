@@ -153,21 +153,6 @@ class ContentProvider extends AbstractProvider implements ProviderInterface {
 	}
 
 	/**
-	 * @return array
-	 */
-	protected function getCallbackCommand() {
-		$command = GeneralUtility::_GET('CB');
-		return (array) $command;
-	}
-
-	/**
-	 * @return string
-	 */
-	protected function getRawPostData() {
-		return file_get_contents('php://input');
-	}
-
-	/**
 	 * @return array|NULL
 	 */
 	protected function getMoveData() {
@@ -180,6 +165,22 @@ class ContentProvider extends AbstractProvider implements ProviderInterface {
 			$return = (TRUE === $hasRequestData && TRUE === $isMoveMethod) ? $request['data'] : NULL;
 		}
 		return $return;
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function getCallbackCommand() {
+		$command = GeneralUtility::_GET('CB');
+		return (array) $command;
+	}
+
+	/**
+	 * @return string
+	 * @codeCoverageIgnore
+	 */
+	protected function getRawPostData() {
+		return file_get_contents('php://input');
 	}
 
 }
