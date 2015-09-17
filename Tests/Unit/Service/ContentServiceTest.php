@@ -336,7 +336,7 @@ class ContentServiceTest extends AbstractTestCase {
 	/**
 	 * @test
 	 */
-	public function moveRecordWithPositiveRelativeToValueLoadsRelativeRecordFromDatabaseAndCopiesValuesToRecordAndSetsColumnPositionAndUpdatesRelativeToValue() {
+	public function moveRecordWithPositiveRelativeToLoadsRelativeCopiesValuesSetsColumnPositionAndUpdatesRelativeToValue() {
 		$methods = array('loadRecordFromDatabase', 'updateRecordInDatabase', 'getTargetAreaStoredInSession');
 		$mock = $this->createMock($methods);
 		$row = array(
