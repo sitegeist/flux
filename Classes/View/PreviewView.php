@@ -312,10 +312,14 @@ class PreviewView {
 					$childrenUids[] = $child['uid'];
 				}
 				$langPointer = $row['sys_language_uid'];
-				$localizeButton = $dblist->newLanguageButton(
-					$dblist->getNonTranslatedTTcontentUids($childrenUids, $dblist->id, $langPointer),
-					$langPointer
-				);
+
+				$nonTranslatedTTcontentUids = $dblist->getNonTranslatedTTcontentUids($childrenUids, $dblist->id, $langPointer);
+				if(!empty($nonTranslatedTTcontentUids)) {
+					$localizeButton = $dblist->newLanguageButton(
+							$nonTranslatedTTcontentUids,
+							$langPointer
+					);
+				}
 				$content .= $localizeButton;
 			}
 		}
